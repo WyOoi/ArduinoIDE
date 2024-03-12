@@ -1,5 +1,6 @@
 #include "BluetoothSerial.h"
 
+//--------Pin on L298N---------//
 int ENA = 25;
 int IN1 = 33;
 int IN2 = 32;
@@ -21,7 +22,7 @@ unsigned char command, command_old;
 
 void setup() {
   Serial.begin(115200);
-  SerialBT.begin("SoccerRobot_1");
+  SerialBT.begin("SoccerRobot_1"); // Robot Bluetooth Name
 
   pinMode(ENA, OUTPUT);
   pinMode(IN1, OUTPUT);
@@ -115,4 +116,24 @@ void stop(){
   digitalWrite(IN3, LOW);
   digitalWrite(IN4, LOW);
   ledcWrite(motorRight, 0);
+}
+
+void curve_Left(){
+  //tactical
+  digitalWrite(IN1, HIGH);
+  digitalWrite(IN2, LOW);
+  ledcWrite(motorLeft, 110);
+  digitalWrite(IN3, HIGH);
+  digitalWrite(IN4, LOW);
+  ledcWrite(motorRight, 130);
+}
+
+void curve_Right(){
+  //tactical
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, HIGH);
+  ledcWrite(motorLeft, 130);
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN4, HIGH);
+  ledcWrite(motorRight, 110);
 }
